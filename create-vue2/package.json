@@ -1,10 +1,10 @@
 {
-  "name": "create-vue",
-  "version": "2.2.0",
-  "description": "An easy way to start a Vue project",
+  "name": "create-dvue",
+  "version": "2.0.0",
+  "description": "An easy way to start a Vue mutli-page project",
   "type": "module",
   "bin": {
-    "create-vue": "outfile.cjs"
+    "create-dvue": "outfile.cjs"
   },
   "files": [
     "outfile.cjs",
@@ -27,12 +27,12 @@
     "url": "git+https://github.com/vuejs/create-vue.git"
   },
   "keywords": [],
-  "author": "Haoqun Jiang <haoqunjiang+npm@gmail.com>",
+  "author": "Yuhang Xie <xieyuhang@didiglobal.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/create-vue/issues"
+    "url": "https://github.com/YuuhangXie/create-dvue/issues"
   },
-  "homepage": "https://github.com/vuejs/create-vue#readme",
+  "homepage": "https://github.com/YuuhangXie/create-dvue",
   "devDependencies": {
     "@types/eslint": "^8.4.5",
     "@types/prompts": "^2.0.14",

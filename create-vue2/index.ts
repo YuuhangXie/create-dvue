@@ -64,7 +64,7 @@ async function init() {
   // --typescript / --ts
   // --jsx
   // --router / --vue-router
-  // --pinia
+  // --store
   // --with-tests / --tests (equals to `--vitest --cypress`)
   // --vitest
   // --cypress
@@ -88,7 +88,7 @@ async function init() {
       argv.ts ??
       argv.jsx ??
       argv.router ??
-      argv.pinia ??
+      argv.store ??
       argv.tests ??
       argv.vitest ??
       argv.cypress ??
@@ -107,7 +107,7 @@ async function init() {
     needsTypeScript?: boolean
     needsJsx?: boolean
     needsRouter?: boolean
-    needsPinia?: boolean
+    needsStore?: boolean
     needsVitest?: boolean
     needsCypress?: boolean
     needsEslint?: boolean
@@ -121,8 +121,8 @@ async function init() {
     //   - enter a valid package name for package.json
     // - Project language: JavaScript / TypeScript
     // - Add JSX Support?
-    // - Install Vue Router for SPA development?
-    // - Install Pinia for state management?
+    // - Install Vue Router for Mutli-Page development?
+    // - Install store for state management?
     // - Add Cypress for testing?
     // - Add ESLint for code quality?
     // - Add Prettier for code formatting?
@@ -180,23 +180,15 @@ async function init() {
         {
           name: 'needsRouter',
           type: () => (isFeatureFlagsUsed ? null : 'toggle'),
-          message: 'Add Vue Router for Single Page Application development?',
+          message: 'Add Vue Router for Multi-Page Application development?',
           initial: false,
           active: 'Yes',
           inactive: 'No'
         },
         {
-          name: 'needsPinia',
+          name: 'needsStore',
           type: () => (isFeatureFlagsUsed ? null : 'toggle'),
-          message: 'Add Pinia for state management?',
-          initial: false,
-          active: 'Yes',
-          inactive: 'No'
-        },
-        {
-          name: 'needsVitest',
-          type: () => (isFeatureFlagsUsed ? null : 'toggle'),
-          message: 'Add Vitest for Unit Testing?',
+          message: 'Add Vuex for state management?',
           initial: false,
           active: 'Yes',
           inactive: 'No'
@@ -254,7 +246,7 @@ async function init() {
     needsJsx = argv.jsx,
     needsTypeScript = argv.typescript,
     needsRouter = argv.router,
-    needsPinia = argv.pinia,
+    needsStore = argv.store,
     needsCypress = argv.cypress || argv.tests,
     needsVitest = argv.vitest || argv.tests,
     needsEslint = argv.eslint || argv['eslint-with-prettier'],
@@ -294,8 +286,8 @@ async function init() {
   if (needsRouter) {
     render('config/router')
   }
-  if (needsPinia) {
-    render('config/pinia')
+  if (needsStore) {
+    render('config/store')
   }
   if (needsVitest) {
     render('config/vitest')
@@ -335,10 +327,10 @@ async function init() {
   render(`code/${codeTemplate}`)
 
   // Render entry file (main.js/ts).
-  if (needsPinia && needsRouter) {
-    render('entry/router-and-pinia')
-  } else if (needsPinia) {
-    render('entry/pinia')
+  if (needsStore && needsRouter) {
+    render('entry/router-and-store')
+  } else if (needsStore) {
+    render('entry/store')
   } else if (needsRouter) {
     render('entry/router')
   } else {
@@ -378,7 +370,7 @@ async function init() {
     )
 
     // Rename entry in `index.html`
-    const indexHtmlPath = path.resolve(root, 'index.html')
+    const indexHtmlPath = path.resolve(root, 'public/index.html')
     const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf8')
     fs.writeFileSync(indexHtmlPath, indexHtmlContent.replace('src/main.js', 'src/main.ts'))
   } else {

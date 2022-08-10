@@ -4,7 +4,7 @@
   "description": "An easy way to start a Vue project",
   "type": "module",
   "bin": {
-    "create-vue": "outfile.cjs"
+    "create-dvue": "outfile.cjs"
   },
   "files": [
     "outfile.cjs",
