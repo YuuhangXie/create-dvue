@@ -84,14 +84,14 @@ async function init() {
   // if any of the feature flags is set, we would skip the feature prompts
   const isFeatureFlagsUsed =
     typeof (
-      argv.default ??
-      argv.ts ??
-      argv.jsx ??
-      argv.router ??
-      argv.pinia ??
-      argv.tests ??
-      argv.vitest ??
-      argv.cypress ??
+      argv.default ||
+      argv.ts ||
+      argv.jsx ||
+      argv.router ||
+      argv.pinia ||
+      argv.tests ||
+      argv.vitest ||
+      argv.cypress ||
       argv.eslint
     ) === 'boolean'
 

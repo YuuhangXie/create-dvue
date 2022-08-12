@@ -65,8 +65,9 @@ async function init() {
   // --jsx
   // --router / --vue-router
   // --store
-  // --with-tests / --tests (equals to `--vitest --cypress`)
-  // --vitest
+  // --sass
+  // --less
+  // --with-tests / --tests
   // --cypress
   // --eslint
   // --eslint-with-prettier (only support prettier through eslint for simplicity)
@@ -90,9 +91,11 @@ async function init() {
       argv.router ??
       argv.store ??
       argv.tests ??
-      argv.vitest ??
       argv.cypress ??
-      argv.eslint
+      argv.eslint ??
+      argv.sass ??
+      argv.less ??
+      argv.stylus
     ) === 'boolean'
 
   let targetDir = argv._[0]
@@ -108,7 +111,7 @@ async function init() {
     needsJsx?: boolean
     needsRouter?: boolean
     needsStore?: boolean
-    needsVitest?: boolean
+    needsCssProcessor?: string
     needsCypress?: boolean
     needsEslint?: boolean
     needsPrettier?: boolean
@@ -194,16 +197,23 @@ async function init() {
           inactive: 'No'
         },
         {
-          name: 'needsCypress',
-          type: () => (isFeatureFlagsUsed ? null : 'toggle'),
-          message: (prev, answers) =>
-            answers.needsVitest
-              ? 'Add Cypress for End-to-End testing?'
-              : 'Add Cypress for both Unit and End-to-End testing?',
-          initial: false,
-          active: 'Yes',
-          inactive: 'No'
+          name: 'needsCssProcessor',
+          type: () => (isFeatureFlagsUsed ? null : 'select'),
+          message: 'Add a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default)?',
+          choices: [
+            { title: 'Sass', value: 'sass' },
+            { title: 'Less', value: 'less' },
+            { title: 'Stylus', value: 'stylus' },
+          ],
         },
+        // {
+        //   name: 'needsCypress',
+        //   type: () => (isFeatureFlagsUsed ? null : 'toggle'),
+        //   message: 'Add Cypress for both Unit and End-to-End testing?',
+        //   initial: false,
+        //   active: 'Yes',
+        //   inactive: 'No'
+        // },
         {
           name: 'needsEslint',
           type: () => (isFeatureFlagsUsed ? null : 'toggle'),
@@ -247,12 +257,13 @@ async function init() {
     needsTypeScript = argv.typescript,
     needsRouter = argv.router,
     needsStore = argv.store,
+    needsCssProcessor = '',
     needsCypress = argv.cypress || argv.tests,
-    needsVitest = argv.vitest || argv.tests,
     needsEslint = argv.eslint || argv['eslint-with-prettier'],
     needsPrettier = argv['eslint-with-prettier']
   } = result
-  const needsCypressCT = needsCypress && !needsVitest
+
+  const needsCypressCT = needsCypress
   const root = path.join(cwd, targetDir)
 
   if (fs.existsSync(root) && shouldOverwrite) {
@@ -289,8 +300,14 @@ async function init() {
   if (needsStore) {
     render('config/store')
   }
-  if (needsVitest) {
-    render('config/vitest')
+  if (needsCssProcessor === 'sass' || argv.sass) {
+    render('config/sass')
+  }
+  if (needsCssProcessor === 'less' || argv.less) {
+    render('config/less')
+  }
+  if (needsCssProcessor === 'stylus' || argv.stylus) {
+    render('config/stylus')
   }
   if (needsCypress) {
     render('config/cypress')
@@ -308,9 +325,6 @@ async function init() {
     }
     if (needsCypressCT) {
       render('tsconfig/cypress-ct')
-    }
-    if (needsVitest) {
-      render('tsconfig/vitest')
     }
   }
 
@@ -400,7 +414,6 @@ async function init() {
       projectName: result.projectName ?? defaultProjectName,
       packageManager,
       needsTypeScript,
-      needsVitest,
       needsCypress,
       needsCypressCT,
       needsEslint

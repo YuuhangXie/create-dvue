@@ -21,20 +21,17 @@ export default function generateReadme({
   needsTypeScript,
   needsCypress,
   needsCypressCT,
-  needsVitest,
   needsEslint
 }) {
   let readme = `# ${projectName}
 
-This template should help get you started developing with Vue 3 in Vite.
+This template should help get you started developing with Vue 2.
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 ${needsTypeScript ? sfcTypeSupportDoc : ''}
 ## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -56,16 +53,6 @@ ${getCommand(packageManager, 'dev')}
 ${getCommand(packageManager, 'build')}
 \`\`\`
 `
-
-  if (needsVitest) {
-    npmScriptsDescriptions += `
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-\`\`\`sh
-${getCommand(packageManager, 'test:unit')}
-\`\`\`
-`
-  }
 
   if (needsCypressCT) {
     npmScriptsDescriptions += `

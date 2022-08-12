@@ -13,7 +13,6 @@ export function preOrderDirectoryTraverse(dir, dirCallback, fileCallback) {
       continue
     }
 
-    console.log(fullpath)
     if (!/vue\.config\.js/.test(fullpath)) {
       fileCallback(fullpath)
     }

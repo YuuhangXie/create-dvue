@@ -20,7 +20,10 @@ interface ESLintConfig extends Linter.Config {
 }
 const config: ESLintConfig = {
   root: true,
-  extends: ['plugin:vue/essential']
+  extends: ['plugin:vue/essential'],
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off'
+  },
 }
 
 function configureEslint({ language, styleGuide, needsPrettier, needsCypress, needsCypressCT }) {
@@ -91,8 +94,8 @@ export default function renderEslint(
       scripts: {
         // Note that we reuse .gitignore here to avoid duplicating the configuration
         lint: needsTypeScript
-          ? 'eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore'
-          : 'eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore'
+          ? 'eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore'
+          : 'eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .eslintignore'
       },
       devDependencies: dependencies
     })

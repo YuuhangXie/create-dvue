@@ -1,0 +1,3 @@
+config/**/*
+cypress/**/*
+vue.config.js

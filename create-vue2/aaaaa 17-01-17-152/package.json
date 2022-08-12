@@ -1,0 +1,35 @@
+{
+  "name": "aaaaa",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "node config/dev.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "test:e2e": "cypress open --e2e",
+    "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
+    "test:unit": "cypress open --component",
+    "test:unit:ci": "cypress run --component --quiet --reporter spec"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^2.7.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "chalk": "^3.0.0",
+    "cypress": "^10.3.0",
+    "eslint": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-vue": "^9.0.0",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "prettier": "^2.5.1",
+    "start-server-and-test": "^1.14.0",
+    "vue-template-compiler": "^2.6.14"
+  }
+}
