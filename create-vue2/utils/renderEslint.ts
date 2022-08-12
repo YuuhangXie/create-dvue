@@ -20,9 +20,20 @@ interface ESLintConfig extends Linter.Config {
 }
 const config: ESLintConfig = {
   root: true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
   extends: ['plugin:vue/essential'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'prettier/prettier': [
+      'warn',
+      {
+        singleQuote: true,
+      },
+    ],
   }
 }
 
