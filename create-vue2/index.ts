@@ -206,14 +206,14 @@ async function init() {
             { title: 'Stylus', value: 'stylus' },
           ],
         },
-        // {
-        //   name: 'needsCypress',
-        //   type: () => (isFeatureFlagsUsed ? null : 'toggle'),
-        //   message: 'Add Cypress for both Unit and End-to-End testing?',
-        //   initial: false,
-        //   active: 'Yes',
-        //   inactive: 'No'
-        // },
+        {
+          name: 'needsCypress',
+          type: () => (isFeatureFlagsUsed ? null : 'toggle'),
+          message: 'Add Cypress for both Unit and End-to-End testing?',
+          initial: false,
+          active: 'Yes',
+          inactive: 'No'
+        },
         {
           name: 'needsEslint',
           type: () => (isFeatureFlagsUsed ? null : 'toggle'),
@@ -330,6 +330,7 @@ async function init() {
 
   // Render ESLint config
   if (needsEslint) {
+    render('eslint/default')
     renderEslint(root, { needsTypeScript, needsCypress, needsCypressCT, needsPrettier })
   }
 
