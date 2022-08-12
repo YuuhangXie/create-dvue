@@ -23,7 +23,7 @@ const config: ESLintConfig = {
   extends: ['plugin:vue/essential'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off'
-  },
+  }
 }
 
 function configureEslint({ language, styleGuide, needsPrettier, needsCypress, needsCypressCT }) {

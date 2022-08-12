@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuejs/create-vue.git"
+    "url": "git+https://github.com/YuuhangXie/create-dvue"
   },
   "keywords": [],
   "author": "Yuhang Xie <xieyuhang@didiglobal.com>",

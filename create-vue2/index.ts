@@ -199,12 +199,13 @@ async function init() {
         {
           name: 'needsCssProcessor',
           type: () => (isFeatureFlagsUsed ? null : 'select'),
-          message: 'Add a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default)?',
+          message:
+            'Add a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default)?',
           choices: [
             { title: 'Sass', value: 'sass' },
             { title: 'Less', value: 'less' },
-            { title: 'Stylus', value: 'stylus' },
-          ],
+            { title: 'Stylus', value: 'stylus' }
+          ]
         },
         {
           name: 'needsCypress',
