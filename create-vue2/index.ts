@@ -300,6 +300,7 @@ async function init() {
   }
   if (needsStore) {
     render('config/store')
+
   }
   if (needsCssProcessor === 'sass' || argv.sass) {
     render('config/sass')
